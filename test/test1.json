@@ -1,0 +1,54 @@
+export const jobsSchema = {
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  $id: 'jobs.schema',
+  type: 'object',
+  patternProperties: {
+    '.*': {
+      type: 'object',
+      patternProperties: {
+        repositories: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        'before|after|actions': {
+          type: 'object',
+          properties: {
+            pull: {
+              $ref: 'pullSchema',
+            },
+            version: {
+              $ref: 'versionSchema',
+            },
+            addFiles: {
+              $ref: 'addFilesSchema',
+            },
+            replaceFiles: {
+              $ref: 'replaceFilesSchema',
+            },
+            removeFiles: {
+              $ref: 'removeFilesSchema',
+            },
+            initialize: {
+              $ref: 'initializeSchema',
+            },
+            install: {
+              $ref: 'installSchema',
+            },
+            commit: {
+              $ref: 'commitSchema',
+            },
+            push: {
+              $ref: 'pushSchema',
+            },
+            createPullRequest: {
+              $ref: 'createPullRequestSchema',
+            },
+          },
+        },
+      },
+      required: ['repositories', 'actions'],
+    },
+  },
+};
